@@ -3,10 +3,10 @@ Clase concreta Armario.
 Representa un armario genérico.
 """
 
-# from ..mueble import Mueble
+from ..mueble import Mueble
 
 
-class Armario:
+class Armario(Mueble):
     """
     Clase concreta que representa un armario.
     """
@@ -21,10 +21,12 @@ class Armario:
         num_cajones: int = 0,
         tiene_espejos: bool = False,
     ):
-        self.nombre = nombre
-        self.material = material
-        self.color = color
-        self.precio_base = int(precio_base) if precio_base is not None else 0
+        super().__init__(
+            nombre,
+            material,
+            color,
+            int(precio_base) if precio_base is not None else 0,
+        )
         self.num_puertas = num_puertas
         self.num_cajones = num_cajones
         self.tiene_espejos = tiene_espejos

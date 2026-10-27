@@ -54,6 +54,9 @@ class SofaCama(Sofa, Cama):
         # Inicializar atributos específicos de cama
         self._tamaño = tamaño_cama
         self._incluye_colchon = incluye_colchon
+        # Cama.__init__ no se invoca, así que se inicializa aquí para que
+        # la propiedad heredada tiene_cabecera no falle
+        self._tiene_cabecera = False
         # Atributos específicos del sofá-cama
         self._mecanismo_conversion = mecanismo_conversion
         self._modo_actual = "sofa"
@@ -133,7 +136,6 @@ class SofaCama(Sofa, Cama):
 
         self._modo_actual = "sofa"
         return f"Cama convertida a sofá usando mecanismo {self.mecanismo_conversion}"
-        pass
 
     def obtener_descripcion(self) -> str:
         """

@@ -4,18 +4,18 @@ from ..concretos.silla import Silla
 
 
 class Comedor:
-    def calcular_precio_total(self) -> float:
-        total = self.mesa.calcular_precio()
-        total += sum(silla.calcular_precio() for silla in self.sillas)
-        return total
-
     """
-	Clase que representa un conjunto de comedor compuesto por una mesa y varias sillas.
-	"""
+    Clase que representa un conjunto de comedor compuesto por una mesa y varias sillas.
+    """
 
     def __init__(self, mesa: Mesa, sillas: List[Silla] = None):
         self.mesa = mesa
         self.sillas = sillas if sillas is not None else []
+
+    def calcular_precio_total(self) -> float:
+        total = self.mesa.calcular_precio()
+        total += sum(silla.calcular_precio() for silla in self.sillas)
+        return total
 
     def agregar_silla(self, silla: Silla):
         self.sillas.append(silla)

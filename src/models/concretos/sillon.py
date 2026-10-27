@@ -3,10 +3,10 @@ Clase concreta Sillón.
 Implementa un mueble de asiento para más de una persona, con brazos y respaldo.
 """
 
-# from ..categorias.asientos import Asiento
+from ..categorias.asientos import Asiento
 
 
-class Sillon:
+class Sillon(Asiento):
     """
     Clase concreta que representa un sillón.
     Hereda de Asiento y añade características específicas.
@@ -25,13 +25,15 @@ class Sillon:
         es_reclinable: bool = False,
         tiene_reposapiés: bool = False,
     ):
-        self.nombre = nombre
-        self.material = material
-        self.color = color
-        self.precio_base = int(precio_base) if precio_base is not None else 0
-        self.capacidad_personas = capacidad_personas
-        self.tiene_respaldo = tiene_respaldo
-        self.material_tapizado = material_tapizado
+        super().__init__(
+            nombre,
+            material,
+            color,
+            int(precio_base) if precio_base is not None else 0,
+            capacidad_personas,
+            tiene_respaldo,
+            material_tapizado,
+        )
         self.tiene_brazos = tiene_brazos
         self.es_reclinable = es_reclinable
         self.tiene_reposapiés = tiene_reposapiés

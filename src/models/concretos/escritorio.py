@@ -3,10 +3,10 @@ Clase concreta Escritorio.
 Representa un escritorio genérico.
 """
 
-# from ..mueble import Mueble
+from ..mueble import Mueble
 
 
-class Escritorio:
+class Escritorio(Mueble):
     """
     Clase concreta que representa un escritorio.
     """
@@ -23,10 +23,12 @@ class Escritorio:
         largo: float = 1.2,
         tiene_iluminacion: bool = False,
     ):
-        self.nombre = nombre
-        self.material = material
-        self.color = color
-        self.precio_base = int(precio_base) if precio_base is not None else 0
+        super().__init__(
+            nombre,
+            material,
+            color,
+            int(precio_base) if precio_base is not None else 0,
+        )
         self.forma = forma
         self.tiene_cajones = tiene_cajones
         self.num_cajones = num_cajones
