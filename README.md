@@ -492,6 +492,64 @@ El estudiante debe actualizar su repositorio personal con:
 5. **Reporte de cobertura** HTML generado
 6. **README actualizado** con instrucciones de ejecución
 
+## Instrucciones de Ejecución (Entrega)
+
+> Nota: el código fuente importa los módulos como `models...`, `services...` y `ui...`
+> (sin el prefijo `src.`), por lo que las pruebas usan ese mismo estilo de import.
+> `pytest.ini` agrega `src` al `pythonpath`, así que no hace falta exportar `PYTHONPATH`.
+
+1. Crear y activar el entorno virtual e instalar dependencias:
+
+    ```bash
+    python -m venv venv
+    source venv/bin/activate      # Mac/Linux/WSL
+    venv\Scripts\activate         # Windows (PowerShell / cmd)
+    pip install -r requirements.txt
+    ```
+
+2. Ejecutar toda la suite (incluye cobertura en terminal y HTML en `htmlcov/`):
+
+    ```bash
+    pytest
+    ```
+
+3. Ejecutar subconjuntos:
+
+    ```bash
+    pytest tests/unit                 # solo unitarias
+    pytest -m integration             # solo integración
+    pytest -m "not slow"              # omitir pruebas lentas
+    pytest tests/unit/services -v     # un módulo específico
+    ```
+
+4. Ejecutar la aplicación interactiva:
+
+    ```bash
+    python src/main.py
+    ```
+
+### Organización de las pruebas
+
+| Ubicación | Contenido |
+|-----------|-----------|
+| `tests/conftest.py` | Registro de marcadores `slow` e `integration` |
+| `tests/fixtures/datos_muebles.py` | Datos de prueba reutilizables |
+| `tests/unit/conftest.py` | Fixtures compartidas (sillas, mesas, comedores, tiendas, mocks) |
+| `tests/unit/models/` | Clase abstracta, categorías, concretos, herencia múltiple y composición |
+| `tests/unit/services/test_tienda.py` | Lógica de negocio con mocks + funcionalidades desarrolladas con TDD |
+| `tests/unit/ui/test_menu.py` | Menú Rich con entradas simuladas (`Prompt`, `IntPrompt`, `Confirm`, `input`) |
+| `tests/unit/test_main.py` | Punto de entrada `main.py` |
+| `tests/integration/` | Flujos completos: catálogo de ejemplo, ventas, descuentos y sesión de menú |
+
+### Funcionalidades desarrolladas con TDD
+
+En `TiendaMuebles` se implementaron, escribiendo primero las pruebas (RED → GREEN):
+
+- `obtener_muebles_por_tipo(tipo_clase)`: filtra por clase, incluyendo subclases.
+- `calcular_valor_inventario()`: suma muebles y comedores, ignorando elementos con error.
+- `_contar_tipos_muebles()`: conteo de muebles por nombre de clase.
+- `aplicar_descuento_material(material, porcentaje)`: reduce el `precio_base` de los muebles de un material (`porcentaje` entre 0 y 1, ej. `0.1` = 10%).
+
 ## Recursos Adicionales
 
 ### Documentación Oficial

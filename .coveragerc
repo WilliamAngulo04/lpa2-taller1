@@ -1,0 +1,18 @@
+[run]
+source = src
+omit =
+    */__pycache__/*
+    */tests/*
+    */venv/*
+    */migrations/*
+
+[report]
+exclude_lines =
+    pragma: no cover
+    def __repr__
+    raise AssertionError
+    raise NotImplementedError
+    if __name__ == .__main__.:
+    pass
+
+fail_under = 80
